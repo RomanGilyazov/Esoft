@@ -1,0 +1,60 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дом</title>
+<style>
+    body {
+        background-color: #87CEEB; /* Цвет неба */
+    }
+
+    .house {
+        position: relative;
+        width: 200px;
+        height: 150px;
+        background-color: #FFD700; /* Цвет дома */
+        margin: 100px auto 0;
+    }
+
+    .roof {
+        width: 0;
+        height: 0;
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        border-bottom: 50px solid #8B4513; /* Цвет крыши */
+        position: absolute;
+        top: -50px;
+        left: 0;
+    }
+
+    .window {
+        width: 50px;
+        height: 50px;
+        background-color: #FFFFFF; /* Цвет окна */
+        border-radius: 50%; /* Делаем круглое окно */
+        position: absolute;
+        top: 70px;
+        left: 75px;
+    }
+
+    .chimney {
+        width: 20px;
+        height: 70px;
+        background-color: #8B4513; /* Цвет дымохода */
+        position: absolute;
+        top: -80px;
+        left: 160px;
+    }
+</style>
+</head>
+<body>
+
+<div class="house">
+    <div class="roof"></div>
+    <div class="window"></div>
+    <div class="chimney"></div>
+</div>
+
+</body>
+</html>
