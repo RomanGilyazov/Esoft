@@ -1,0 +1,39 @@
+function deepCopy(obj, hash = new WeakMap()) {
+    // Если obj является примитивом, просто возвращаем его
+    if (Object(obj) !== obj || obj instanceof Function || obj instanceof Symbol) {
+        return obj;
+    }
+    
+    // Если obj уже был скопирован, возвращаем его копию
+    if (hash.has(obj)) return hash.get(obj);
+    
+    // Обработка различных типов объектов
+    let result;
+    if (obj instanceof Date) {
+        result = new Date(obj);
+    } else if (obj instanceof Map) {
+        result = new Map(Array.from(obj, ([key, val]) => [key, deepCopy(val, hash)]));
+    } else if (obj instanceof Set) {
+        result = new Set(Array.from(obj, val => deepCopy(val, hash)));
+    } else if (Array.isArray(obj)) {
+        result = [];
+        hash.set(obj, result); // Запоминаем ссылку на исходный массив
+        obj.forEach((item, index) => {
+            result[index] = deepCopy(item, hash);
+        });
+    } else if (Object.prototype.toString.call(obj) === "[object Object]") {
+        // Для объектов создаем новый объект и рекурсивно копируем свойства
+        result = {};
+        hash.set(obj, result); // Запоминаем ссылку на исходный объект
+        for (let key in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                result[key] = deepCopy(obj[key], hash);
+            }
+        }
+    } else {
+        // Если тип данных не поддерживается, возвращаем исходное значение
+        return obj;
+    }
+    
+    return result;
+}
